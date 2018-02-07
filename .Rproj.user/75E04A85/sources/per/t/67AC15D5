@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1517481512959.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "732975608",
+    "id" : "67AC15D5",
+    "lastKnownWriteTime" : 1517502373,
+    "last_content_update" : 1517502373905,
+    "path" : "~/GitHub/R for veryone/Jared P Lander.Rmd",
+    "project_path" : "Jared P Lander.Rmd",
+    "properties" : {
+        "chunk_output_type" : "inline",
+        "cursorPosition" : "51,0",
+        "scrollLine" : "23",
+        "tempName" : "Untitled3"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,62 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+
+x <- 10:1
+y <- -4:5
+z <- c("Hockey", "Football", "Baseball", "Curling", "Rugby", "Lacrosse", "Basketball", "Tennis", "Cricket", "Soccer")
+
+theDF <- data.frame(x, y, z)
+theDF
+theDF <- data.frame(First = x, Second = y, Sports = z)
+theDF
+
+nrow(theDF)
+ncol(theDF)
+#if nrow() and ncol() both wanted at the same time, then
+dim(theDF)
+
+#Checking column names of a data.frame
+names(theDF)
+names(theDF) [3]
+
+#Checking column names of a data.frame
+rownames(theDF)
+rownames(theDF) <- c("One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "ten")
+rownames(theDF)
+#set them back to generic index
+rownames(theDF) <- NULL
+rownames(theDF)
+
+head(theDF)
+head(theDF, n = 7)
+tail(theDF)
+
+#check the class of the data.frame
+class(theDF)
+
+#access individual column
+theDF$Sports
+
+#get the 3rd row from the 2nd column
+theDF[3, 2]
+#row 3, column 2 through 3
+theDF[3, 2:3]
+
+
+
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
