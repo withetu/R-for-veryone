@@ -9,6 +9,9 @@ Try executing this chunk by clicking the *Run* button within the chunk or by pla
 
 ```{r}
 
+##  data.frames
+
+
 x <- 10:1
 y <- -4:5
 z <- c("Hockey", "Football", "Baseball", "Curling", "Rugby", "Lacrosse", "Basketball", "Tennis", "Cricket", "Soccer")
@@ -49,6 +52,46 @@ theDF$Sports
 theDF[3, 2]
 #row 3, column 2 through 3
 theDF[3, 2:3]
+
+#rows 3 and 5, column 2
+theDF[c(3,5), 2] #since only one column was selected it was returned as a vector, the column name will not be printed
+
+#rows 3 and 5, column 2 through 3
+theDF[c(3,5), 2:3]
+
+#all of column 3
+theDF[, 3]
+#all of the columns 2 through 3
+theDF[, 2:3]
+
+#all of row 2
+theDF[2, ]
+#all of rows 2 through 4
+theDF[2:4, ]
+
+#access multiple columns by name, make column argument a character vector of the names
+theDF[ , c("First", "Sports")]
+
+class(theDF[, "Sports"])
+class(theDF["Sports"])
+class(theDF[["Sports"]])
+
+#drop=FALSE, works when specifying a single column by number
+theDF[, "Sports", drop = FALSE]
+class(theDF[, "Sports", drop = FALSE])
+theDF[, 3, drop = FALSE]
+class(theDF[, 3, drop = FALSE])
+
+#model.matrix to create a set of indicator variables
+#i.e. one column for each level of a factor, with a 1 if a row contains that level or a 0 otherwise
+newFactor <- factor(c("Pennsylvania", "New York", "New Jersey", "New York", "Tennessee", "Massachusetts", "Pennsylvania", "New York"))
+model.matrix(~newFactor - 1)
+
+
+
+
+##  Lists
+
 
 
 
