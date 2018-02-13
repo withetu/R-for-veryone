@@ -5,16 +5,16 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1226504396",
+    "hash" : "0",
     "id" : "853E0666",
-    "lastKnownWriteTime" : 1518458428,
-    "last_content_update" : 1518458428049,
+    "lastKnownWriteTime" : 1518537118,
+    "last_content_update" : 1518537118403,
     "path" : "~/GitHub/R for veryone/Jared P Lander.Rmd",
     "project_path" : "Jared P Lander.Rmd",
     "properties" : {
         "chunk_output_type" : "inline",
-        "cursorPosition" : "202,0",
-        "scrollLine" : "173"
+        "cursorPosition" : "283,0",
+        "scrollLine" : "254"
     },
     "relative_order" : 2,
     "source_on_save" : false,
