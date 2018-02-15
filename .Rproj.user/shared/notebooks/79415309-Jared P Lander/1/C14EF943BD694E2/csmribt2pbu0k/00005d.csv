@@ -1,0 +1,5 @@
+"0","sqldf(""select year, avg(n) as 'Average' from babynames froup by year order by Average desc"")
+"
+"2","Error in rsqlite_send_query(conn@ptr, statement) : 
+  near ""by"": syntax error
+"
