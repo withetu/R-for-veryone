@@ -316,7 +316,28 @@ sqldf("select name, leftstr(name,3) as 'First_3' from babynames order by First_3
 sqldf("select name, reverse(name) as 'Rev_Name' from babynames limit 100")
 sqldf("select name, rightstr(name,3) as 'Back_3' from babynames order by Back_3 desc limit 100")
 
-
+library(DBI)
+# Create an ephemeral in-memory RSQLite database
+con <- dbConnect(RSQLite::SQLite(), ":memory:")
+dbListTables(con)
+dbWriteTable(con, "mtcars", mtcars)
+dbListTables(con)
+dbListFields(con, "mtcars")
+dbReadTable(con, "mtcars")
+# You can fetch all results:
+res <- dbSendQuery(con, "select * from mtcars where cyl = 4")
+dbFetch(res)
+dbClearResult(res)
+# Or a chunk at a time
+res <- dbSendQuery(con, "select * from mtcars where cyl = 4")
+while(!dbHasCompleted(res)){
+  chunk <- dbFetch(res, n = 5)
+  print(nrow(chunk))
+}
+# Clear the result
+dbClearResult(res)
+# Disconnect from the database
+dbDisconnect(con)
 
 
 
@@ -386,6 +407,110 @@ bowlPool
 
 ##    Statistical Graphics   ##
 
+
+##Base Graphics
+library(ggplot2)
+data(diamonds)
+head(diamonds)
+
+#Base Histograms
+hist(diamonds$carat, main = "Carat Histograms", xlab = "Carat")
+
+#Base Scatterplot
+plot(price ~ carat, data = diamonds)
+
+#Boxplots
+boxplot(diamonds$carat)
+
+
+
+
+## ggplot2
+#ggplot2 Histograms abd Densities
+ggplot(data = diamonds) +
+  geom_histogram(aes(x = carat))
+
+ggplot(data = diamonds) +
+  geom_density(aes(x = carat), fill = "grey50")
+
+#ggplot2 Scatterpplots
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point()
+#or
+ggplot(diamonds) +
+  geom_point(aes(x = carat, y = price))
+#saving basics of ggplot object to a variable
+g <- ggplot(diamonds, aes(x = carat, y = price))
+#color aesthetic
+g + geom_point(aes(color = color)) #a legend was automatically generated
+#facet_wrap
+g + geom_point(aes(color = color)) + facet_wrap(~ color)
+#facet_grid
+g + geom_point(aes(color = color)) + facet_grid(cut ~ clarity)
+#Faceting with histograms
+ggplot(diamonds, aes(x = carat)) + geom_histogram() + facet_wrap(~color)
+
+#ggplot2 Boxplots and Violins Plots
+ggplot(diamonds, aes(y = carat, x = 1)) + geom_boxplot()
+#This is neatly extended to drawing multiple boxplots, one for each level of a variable
+ggplot(diamonds, aes(y = carat, x = cut)) + geom_boxplot()
+#Getting fancy, we can swap out the boxplot for violin plots using geom_violin
+ggplot(diamonds, aes(y = carat, x = cut)) + geom_violin()
+#Violin plots with points
+ggplot(diamonds, aes(y = carat, x = cut)) + geom_point() + geom_violin()
+ggplot(diamonds, aes(y = carat, x = cut)) + geom_violin() + geom_point()
+
+#ggplot2 Line Graphs
+data("economics")
+head(economics)
+ggplot(economics, aes(x = date, y = pop)) + geom_line()
+ggplot(economics, aes(x = date, y = pop, group = 1)) + geom_line()
+
+#manipulating dates
+library(lubridate)
+#create year and month variables
+economics$year <- year(economics$date)
+#the label argument to month means that the result should be the names of the month instead of the number
+economics$month <- month(economics$date, label = TRUE)
+#subset the data
+#the which function returns the indices of observations where the tested condition was TRUE
+econ2000 <- economics[which(economics$year >= 2000), ]
+#load the scales package for better axis formatting
+library(scales)
+#build the foundation of the plot
+g <- ggplot(econ2000, aes(x = month, y = pop))
+#add lines color coded and grouped by year
+#the group aesthetic breaks the data into separate groups
+g <- g + geom_line(aes(color = factor(year), group = year))
+#name the legencd "Year"
+g <- g + scale_color_discrete(name = "Year")
+#format the y axis
+g <- g + scale_y_continuous(labels = comma)
+#add a title and axis labels
+g <- g + labs(title = "Population Growth", x = "Month", y = "Population")
+#plot the graph
+g
+
+#Themes
+library(ggthemes)
+#build a plot and store it in g2
+g2 <- ggplot(diamonds, aes(x = carat, y = price)) + geom_point(aes(color=color))
+#apply few themes
+g2 + theme_economist() + scale_color_economist()  
+g2 + theme_excel() + scale_color_excel()
+g2 + theme_tufte()
+g2 + theme_wsj()
+
+
+
+
+
+
+
+##    Writing R functions   ##
+
+
+##Hello World
 
 
 
